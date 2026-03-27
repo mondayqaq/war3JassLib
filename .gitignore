@@ -1,0 +1,19 @@
+# 默认忽略所有
+/*
+
+# 跟踪 jass/Monday
+!jass/
+jass/*
+!jass/Monday/
+jass/Monday/.vscode/
+jass/Monday/Backup.txt
+
+# 跟踪 share/mpq/Monday
+!share/
+share/*
+!share/mpq/
+share/mpq/*
+!share/mpq/Monday/
+
+# 跟踪 .gitignore 自身
+!.gitignore

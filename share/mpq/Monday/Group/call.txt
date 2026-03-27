@@ -1,0 +1,58 @@
+[GetUnitGroupInRangeEx]
+title = "获取指定坐标，指定半径范围内的盟友/敌方单位组"
+description = "获取坐标(${x},${y})，半径为 ${半径} 范围内与 ${玩家} 是 ${阵营关系} 关系的单位组，排除死亡单位（${布尔值}），排除建筑（${布尔值}），排除无敌单位（${布尔值}），包含中立单位（${布尔值}）"
+comment = "会创建单位组"
+category = TC_Monday
+returns = group
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = player
+[[.args]]
+type = PlayerFaction
+default = "PlayerFaction_0"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "false"
+
+[CountUnitsInGroupEx]
+title = "获取单位组中符合条件的单位数量"
+description = "获取 ${单位组} 内与 ${玩家} 是 ${阵营关系} 关系的单位数量，排除死亡单位（${布尔值}），排除建筑（${布尔值}），排除无敌单位（${布尔值}），包含中立单位（${布尔值}）"
+comment = ""
+category = TC_Monday
+returns = integer
+[[.args]]
+type = group
+[[.args]]
+type = player
+[[.args]]
+type = PlayerFaction
+default = "PlayerFaction_0"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "false"

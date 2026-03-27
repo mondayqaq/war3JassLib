@@ -1,0 +1,37 @@
+[CreateItemWithCharges]
+title = "创建物品给单位"
+description = "创建使用次数为 ${数量} 的 ${物品} 并给予 ${单位} （自动堆叠：${真值}）。若单位不存在，则创建在坐标 (${x}, ${y}) 处"
+comment = "开启自动堆叠的情况下，若单位持有相同类型的物品，且持有物品的使用次数大于0，则直接增加使用次数/n测试"
+category = TC_Monday
+returns = item
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = itemcode
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[CreateItemAtRectPosition]
+title = "创建物品到矩形区域"
+description = "创建 ${物品类型} 到 ${矩形区域} 的 ${位置}"
+comment = "如果矩形区域不存在，那么物品不会被创建"
+category = TC_Monday
+returns = item
+[[.args]]
+type = itemcode
+[[.args]]
+type = rect
+[[.args]]
+type = PositionType
+default = "PositionType_0"

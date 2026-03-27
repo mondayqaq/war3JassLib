@@ -1,0 +1,78 @@
+[showDebugInfo]
+title = "[蝉] 显示Debug信息"
+description = "当 ${isDebug} 时，输出信息： ${Debug信息}"
+comment = ""
+category = TC_NOTHING
+[[.args]]
+type = boolean
+[[.args]]
+type = string
+
+[createFloatText]
+title = "[蝉] 创建并显示漂浮文本"
+description = "创建文本内容为 ${文本}，字体大小为 ${大小} 字体颜色为(R:${Red},G:${Green},B:${Blue},A:${Alpha})的漂浮文本，显示在(${x},${y},${z})，持续 ${second} 秒"
+comment = ""
+category = TC_NOTHING
+[[.args]]
+type = string
+[[.args]]
+type = real
+default = "0.02"
+[[.args]]
+type = integer
+default = "255"
+[[.args]]
+type = integer
+default = "255"
+[[.args]]
+type = integer
+default = "255"
+[[.args]]
+type = integer
+default = "255"
+[[.args]]
+type = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+default = "50"
+[[.args]]
+type = real
+default = "1"
+
+[SetUnitScaleSingle]
+title = "[蝉] 设置单位尺寸（按倍数）"
+description = "设置 ${单位} 的尺寸缩放为 ${size}"
+comment = "同时缩放长、宽、高，忽略小于等于0的值"
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = real
+default = "1.00"
+
+[PlayUnitBirthAnimation]
+title = "[蝉] 播放单位出生动画"
+description = "暂停并播放 ${单位} 的出生动画，持续 ${时间} 秒"
+comment = "播放结束后自动重置单位动作"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = real
+default = "0"
+
+[MoveUnitToRectPosition]
+title = "[蝉] 移动单位到矩形区域"
+description = "移动 ${单位} 到 ${矩形区域} 的 ${位置}"
+comment = "如果矩形区域不存在，那么单位不会被移动"
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = rect
+[[.args]]
+type = PositionType
+default = "PositionType_0"

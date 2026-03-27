@@ -1,0 +1,40 @@
+[GetUnitStateByString]
+title = "根据字符串获取单位属性"
+description = "${单位} 的 ${属性名}"
+comment = "属性名：最大生命值,最大魔法值,当前生命值,当前魔法值,已损失生命值,已损失魔法值,生命值百分比,魔法值百分比,已损失生命值百分比,已损失魔法值百分比,等级,攻击力,护甲"
+category = TC_Monday
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = string
+
+[GetUnitDerivedAttribute]
+title = "单位衍生属性"
+description = "${单位} 的 ${属性}"
+comment = ""
+category = TC_Monday
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = UnitAttributes
+default = "UnitAttributes_0"
+
+[GetHeroAttribute]
+title = "英雄属性（实数）"
+description = "${英雄} 的 ${属性值}，包括加成（${布尔值}）"
+comment = ""
+category = TC_Monday
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = HeroAttributes
+default = "HeroAttributes_0"
+[[.args]]
+type = boolean
+default = "true"

@@ -1,0 +1,291 @@
+[getAngleBetweenUnits]
+title = "两个单位间的角度"
+description = "${单位} 与 ${单位} 的角度"
+comment = ""
+category = TC_Monday
+returns = degree
+[[.args]]
+type = unit
+[[.args]]
+type = unit
+
+[CreateTemporaryUnit]
+title = "创建临时单位"
+description = "为 ${玩家} 创建拥有 ${技能} 和持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
+comment = ""
+category = TC_Monday
+returns = unit
+[[.args]]
+type = player
+[[.args]]
+type = abilcode
+[[.args]]
+type = real
+default = "1"
+[[.args]]
+type = timedlifebuffcode
+default = "TimedLifeBuffCodeWaterElemental"
+[[.args]]
+type = unitcode
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[CreateTemporaryUnit2]
+title = "创建临时单位(无技能)"
+description = "为 ${玩家} 创建持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
+comment = ""
+category = TC_Monday
+returns = unit
+[[.args]]
+type = player
+[[.args]]
+type = real
+default = "1"
+[[.args]]
+type = timedlifebuffcode
+default = "TimedLifeBuffCodeWaterElemental"
+[[.args]]
+type = unitcode
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[GetRectRandomX]
+title = "获取矩形区域内的随机X坐标"
+description = "获取 ${矩形区域} 内的随机X坐标"
+comment = ""
+category = TC_Monday
+returns = real
+[[.args]]
+type = rect
+
+[GetRectRandomY]
+title = "获取矩形区域内的随机Y坐标"
+description = "获取 ${矩形区域} 内的随机Y坐标"
+comment = ""
+category = TC_Monday
+returns = real
+[[.args]]
+type = rect
+
+[getRandom0To3]
+title = "概率获取0-3中的随机整数"
+description = "获取0-3中的随机整数，概率分布为 ${概率} ${概率} ${概率} ${概率}"
+comment = ""
+category = TC_Monday
+returns = integer
+[[.args]]
+type = integer
+default = "100"
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = integer
+default = "0"
+
+[isCoordinateInRect]
+title = "区域包含坐标"
+description = "${矩形区域} 包含坐标 (${x},${y})"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = rect
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[ConvertIntToWeaponType]
+title = "转换整数为武器类型"
+description = "转换 ${整数} 为武器类型"
+comment = "整数 0~12 顺序对应预设中的武器类型"
+category = TC_Monday
+returns = weapontype
+[[.args]]
+type = integer
+default = "0"
+
+[IsUnitInvulnerable]
+title = "单位是无敌的"
+description = "${单位} 是无敌的"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = unit
+
+[GetRandomEnemyUnitInRange]
+title = "获取指定坐标，指定半径范围内的随机敌方单位"
+description = "获取玩家 ${玩家} 在坐标(${x},${y})，半径为 ${半径} 范围内的随机敌对单位"
+comment = "不包含无敌和死亡的单位"
+category = TC_Monday
+returns = unit
+[[.args]]
+type = player
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[CompareIntegers]
+title = "比较两个整数"
+description = "${整数} ${关系运算符} ${整数}"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = ComparisonOperators
+default = "ComparisonOperators_2"
+[[.args]]
+type = integer
+default = "0"
+
+[CompareReals]
+title = "比较两个实数"
+description = "${实数} ${关系运算符} ${实数}"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = ComparisonOperators
+default = "ComparisonOperators_2"
+[[.args]]
+type = real
+default = "0"
+
+[SelectInteger]
+title = "根据布尔值选择返回整数"
+description = "若 ${布尔值} 为真，则返回 ${整数}，否则返回 ${整数}"
+comment = ""
+category = TC_Monday
+returns = integer
+[[.args]]
+type = boolean
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = integer
+default = "0"
+
+[SelectReal]
+title = "根据布尔值选择返回实数"
+description = "若 ${布尔值} 为真，则返回 ${实数}，否则返回 ${实数}"
+comment = ""
+category = TC_Monday
+returns = real
+[[.args]]
+type = boolean
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[GetRandomIntExclude]
+title = "生成区间内排除某个值的随机整数"
+description = "生成区间 ${整数} 至 ${整数} 内不等于 ${整数} 的随机整数"
+comment = "若区间内只有一个值且等于排除值，则返回0"
+category = TC_Monday
+returns = integer
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = integer
+default = "0"
+
+[CalculateRealWithInt]
+title = "算数运算 Lv.2（实数与整数）"
+description = "${实数} ${算数运算符} ${整数}"
+comment = "整数会转化为实数。若除数为0，该函数返回0"
+category = TC_Monday
+returns = real
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = ArithmeticOperators
+default = "ArithmeticOperators_0"
+[[.args]]
+type = integer
+default = "0"
+
+[CalculateRealWithIntExtended]
+title = "算数运算 Lv.3（实数与整数）"
+description = "${实数} ${算数运算符} ${实数} ${算数运算符} ${整数}"
+comment = "整数会转化为实数。若式子中的除数为0，则该式子的结果为0"
+category = TC_Monday
+returns = real
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = ArithmeticOperators
+default = "ArithmeticOperators_0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = ArithmeticOperators
+default = "ArithmeticOperators_0"
+[[.args]]
+type = integer
+default = "0"
+
+[GetRealOrDefault]
+title = "零值实数检查"
+description = "${实数} ?: ${默认值}"
+comment = "若左侧实数为0，则返回右侧默认值"
+category = TC_Monday
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[GetIntegerOrDefault]
+title = "零值整数检查"
+description = "${整数} ?: ${默认值}"
+comment = "若左侧整数为0，则返回右侧默认值"
+category = TC_Monday
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
