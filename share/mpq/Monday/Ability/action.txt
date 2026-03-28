@@ -1,8 +1,8 @@
 [IncAbilityLevel]
-title = "[蝉] 提升单位的技能等级（无技能时自动添加）"
+title = "[技能] 提升单位的技能等级（无技能时自动添加）"
 description = "提升 ${单位} 的 ${技能} 等级 ${等级} 级"
 comment = "没有对应技能的单位的技能等级为0，因此提升X级后的技能等级仍为X"
-category = TC_UNIT
+category = TC_Monday
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -13,10 +13,10 @@ type = integer
 default = "1"
 
 [SetAbilityLevel]
-title = "[蝉] 设置单位的技能等级（无技能时自动添加）"
+title = "[技能] 设置单位的技能等级（无技能时自动添加）"
 description = "设置 ${单位} 的 ${技能} 等级为 ${等级} 级"
 comment = "没有对应技能的单位会先添加技能，再设置技能等级"
-category = TC_UNIT
+category = TC_Monday
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -25,3 +25,42 @@ type = abilcode
 [[.args]]
 type = integer
 default = "1"
+
+[AddAbilityWithCooldown]
+title = "[技能] 添加技能并设置初始冷却时间"
+description = "为 ${单位} 添加 ${技能}，设置等级为 ${等级} 级，初始冷却 ${冷却时间} 秒"
+comment = "添加技能后立即进入冷却状态，不能马上使用"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = real
+default = "0.00"
+
+[ReplaceAbilityTimed]
+title = "[技能] 临时替换单位技能"
+description = "将 ${单位} 的 ${原技能} 替换为 ${新技能}，继承技能等级（${布尔值}），持续 ${持续时间} 秒后复原，复原冷却 ${冷却时间} 秒"
+comment = "持续时间结束后，如果单位仍拥有新技能，则移除新技能并恢复原技能及等级"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = abilcode
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = real
+default = "10.00"
+[[.args]]
+type = real
+default = "0.00"
