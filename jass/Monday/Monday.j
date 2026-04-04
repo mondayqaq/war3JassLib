@@ -466,4 +466,18 @@ function GetIntegerOrDefault takes integer value, integer defaultValue returns i
     return value
 endfunction
 
+/**
+ * 计算二次函数值：k * (a * n^2 + b * n + c)
+ * 
+ * @param k 系数（如 2/5 则传入 0.4）
+ * @param a 二次项系数
+ * @param b 一次项系数
+ * @param c 常数项
+ * @param n 变量（如等级）
+ * @returns 计算结果
+ */
+function QuadraticFunction takes real k, real a, real b, real c, real n returns real
+    return k * (a * n * n + b * n + c)
+endfunction
+
 endlibrary 

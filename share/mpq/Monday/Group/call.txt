@@ -56,3 +56,41 @@ default = "true"
 [[.args]]
 type = boolean
 default = "false"
+
+[FillUnitGroupInRangeEx]
+title = "填充单位组至指定数量（范围内筛选）"
+description = "向 ${单位组} 中添加符合条件的单位直到数量达到 ${最大数量}，范围：坐标(${x},${y})，半径 ${半径}，与 ${玩家} 是 ${阵营关系} 关系，排除死亡单位（${布尔值}），排除建筑（${布尔值}），排除无敌单位（${布尔值}），包含中立单位（${布尔值}）"
+comment = "不会创建新单位组，向已有单位组中添加单位，已在组内的单位不会重复添加"
+category = TC_Monday
+returns = group
+[[.args]]
+type = group
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = player
+[[.args]]
+type = PlayerFaction
+default = "PlayerFaction_0"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "false"

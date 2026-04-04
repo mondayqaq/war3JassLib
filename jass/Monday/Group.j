@@ -164,4 +164,99 @@ function CountUnitsInGroupEx takes group whichGroup, player whichPlayer, boolean
     return count
 endfunction
 
+/**
+ * 获取范围内符合条件的单位，添加到已有单位组中，直到达到指定数量
+ * params - alliedUnits -> PlayerFaction
+ */
+function FillUnitGroupInRangeEx takes group targetGroup, integer maxCount, real x, real y, real radius, player whichPlayer, boolean alliedUnits, boolean excludeDead, boolean excludeStructures, boolean excludeInvulnerable, boolean includeNeutral returns group
+    local group tempGroup = CreateGroup()
+    local unit currentUnit
+    local player unitOwner
+    local integer playerId
+    local boolean isEnemy
+    local boolean isAlly
+    local boolean isNeutral
+    local boolean isValid
+    local integer currentCount = CountUnitsInGroup(targetGroup)
+    
+    if currentCount >= maxCount then
+        return targetGroup
+    endif
+    
+    // 枚举指定范围内的所有单位
+    call GroupEnumUnitsInRange(tempGroup, x, y, radius, null)
+    
+    // 遍历所有单位，根据条件筛选
+    loop
+        set currentUnit = FirstOfGroup(tempGroup)
+        exitwhen currentUnit == null
+        exitwhen currentCount >= maxCount
+        
+        set isValid = true
+        
+        // 跳过已在目标组中的单位
+        if IsUnitInGroup(currentUnit, targetGroup) then
+            set isValid = false
+        endif
+        
+        // 检查是否排除死亡单位
+        if isValid and excludeDead and IsUnitType(currentUnit, UNIT_TYPE_DEAD) then
+            set isValid = false
+        endif
+        
+        // 检查是否排除建筑单位
+        if isValid and excludeStructures and IsUnitType(currentUnit, UNIT_TYPE_STRUCTURE) then
+            set isValid = false
+        endif
+        
+        // 检查是否排除无敌单位
+        if isValid and excludeInvulnerable and IsUnitInvulnerable(currentUnit) then
+            set isValid = false
+        endif
+        
+        // 检查玩家关系
+        if isValid then
+            set unitOwner = GetOwningPlayer(currentUnit)
+            set playerId = GetPlayerId(unitOwner)
+            set isNeutral = (playerId >= 12 and playerId <= 23)
+            set isEnemy = IsUnitEnemy(currentUnit, whichPlayer)
+            set isAlly = IsUnitAlly(currentUnit, whichPlayer)
+            
+            if alliedUnits then
+                if not isAlly or (isNeutral and not includeNeutral) then
+                    set isValid = false
+                endif
+            else
+                if not isEnemy and not (isNeutral and includeNeutral) then
+                    set isValid = false
+                endif
+            endif
+        endif
+        
+        // 如果单位符合条件，添加到目标组
+        if isValid then
+            call GroupAddUnit(targetGroup, currentUnit)
+            set currentCount = currentCount + 1
+        endif
+        
+        call GroupRemoveUnit(tempGroup, currentUnit)
+    endloop
+    
+    // 清理
+    call DestroyGroup(tempGroup)
+    set tempGroup = null
+    set unitOwner = null
+    
+    return targetGroup
+endfunction
+
+// 清除指定玩家屏幕上的文本信息
+function ClearPlayerMessage takes player whichPlayer returns nothing
+    local force f = CreateForce()
+    call ForceAddPlayer(f, whichPlayer)
+    call ClearTextMessagesBJ(f)
+    call DestroyForce(f)
+    set f = null
+endfunction
+
 endlibrary
