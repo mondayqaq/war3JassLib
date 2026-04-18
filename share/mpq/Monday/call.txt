@@ -311,3 +311,38 @@ default = "0.00"
 [[.args]]
 type = real
 default = "0.00"
+
+[ConcatStringInt]
+title = "[字符串] 拼接字符串（整数）"
+description = "${字符串} + ${整数} + ${字符串}"
+comment = "将整数自动转换为字符串后拼接"
+category = TC_Monday
+returns = string
+[[.args]]
+type = string
+default = ""
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = string
+default = ""
+
+[ConcatStringReal]
+title = "[字符串] 拼接字符串（实数）"
+description = "${字符串} + ${实数}（保留 ${小数位数} 位小数）+ ${字符串}"
+comment = "将实数自动转换为字符串后拼接，可指定保留小数位数"
+category = TC_Monday
+returns = string
+[[.args]]
+type = string
+default = ""
+[[.args]]
+type = real
+default = "0.00"
+[[.args]]
+type = integer
+default = "2"
+[[.args]]
+type = string
+default = ""

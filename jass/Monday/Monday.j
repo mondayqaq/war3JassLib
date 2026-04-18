@@ -452,7 +452,7 @@ function GetRealOrDefault takes real value, real defaultValue returns real
 endfunction
 
 /**
- * 获取整数默认值：若第一个实数为0，则返回第二个实数，否则返回第一个实数
+ * 获取整数默认值：若第一个整数为0，则返回第二个整数，否则返回第一个整数
  * 
  * @param value 要检查的整数
  * @param defaultValue 默认值
@@ -478,6 +478,19 @@ endfunction
  */
 function QuadraticFunction takes real k, real a, real b, real c, real n returns real
     return k * (a * n * n + b * n + c)
+endfunction
+
+// 拼接字符串（中间插入整数）
+function ConcatStringInt takes string prefix, integer value, string suffix returns string
+    return prefix + I2S(value) + suffix
+endfunction
+
+// 拼接字符串（中间插入实数，保留指定位数小数）
+function ConcatStringReal takes string prefix, real value, integer decimals, string suffix returns string
+    if decimals <= 0 then
+        return prefix + I2S(R2I(value)) + suffix
+    endif
+    return prefix + R2SW(value, 0, decimals) + suffix
 endfunction
 
 endlibrary 

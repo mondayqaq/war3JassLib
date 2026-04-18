@@ -1,0 +1,13 @@
+[AddUnitState]
+title = "[单位属性] 自增单位属性值"
+description = "将 ${单位} 的 ${属性} 增加 ${数值}"
+comment = "传入负数即为减少"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitstate
+[[.args]]
+type = real
+default = "0.00"
