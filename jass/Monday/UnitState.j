@@ -144,9 +144,14 @@ function GetHeroAttribute takes unit hero, integer attrType, boolean includeBonu
     endif
 endfunction
 
-// 自增单位属性值
+// 增加单位属性
 function AddUnitState takes unit whichUnit, unitstate whichState, real value returns nothing
     call SetUnitState(whichUnit, whichState, GetUnitState(whichUnit, whichState) + value)
+endfunction
+
+// 设置单位属性
+function SetUnitStateEx takes unit whichUnit, unitstate whichState, real value returns nothing
+    call SetUnitState(whichUnit, whichState, value)
 endfunction
 
 endlibrary
