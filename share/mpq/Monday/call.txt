@@ -346,3 +346,29 @@ default = "2"
 [[.args]]
 type = string
 default = ""
+
+[BooleanAnd]
+title = "与运算"
+description = "${布尔值} 且 ${布尔值}"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"
+
+[BooleanOr]
+title = "或运算"
+description = "${布尔值} 或 ${布尔值}"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = boolean
+default = "true"
+[[.args]]
+type = boolean
+default = "true"

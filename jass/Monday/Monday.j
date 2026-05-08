@@ -493,4 +493,26 @@ function ConcatStringReal takes string prefix, real value, integer decimals, str
     return prefix + R2SW(value, 0, decimals) + suffix
 endfunction
 
+/**
+ * 逻辑与运算
+ * 
+ * @param a 第一个布尔值
+ * @param b 第二个布尔值
+ * @returns 两个布尔值的与运算结果
+ */
+function BooleanAnd takes boolean a, boolean b returns boolean
+    return a and b
+endfunction
+
+/**
+ * 逻辑或运算
+ * 
+ * @param a 第一个布尔值
+ * @param b 第二个布尔值
+ * @returns 两个布尔值的或运算结果
+ */
+function BooleanOr takes boolean a, boolean b returns boolean
+    return a or b
+endfunction
+
 endlibrary 
