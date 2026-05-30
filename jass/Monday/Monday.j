@@ -47,11 +47,28 @@ function GetRectRandomY takes rect r returns real
     return GetRectMinY(r) + GetRandomReal(0, GetRectHeightBJ(r))
 endfunction
 
-// 获取 0 ~ 3 中的随机数
+// 获取 0 ~ 3 中的随机数（负数参数自动修正为0）
 function getRandom0To3 takes integer p1, integer p2, integer p3, integer p4 returns integer
-    local integer total = p1 + p2 + p3 + p4
-    local integer random = GetRandomInt(1, total)
+    local integer total
+    local integer random
     local integer result = 0
+    
+    // 负数参数修正为0
+    if p1 < 0 then
+        set p1 = 0
+    endif
+    if p2 < 0 then
+        set p2 = 0
+    endif
+    if p3 < 0 then
+        set p3 = 0
+    endif
+    if p4 < 0 then
+        set p4 = 0
+    endif
+    
+    set total = p1 + p2 + p3 + p4
+    set random = GetRandomInt(1, total)
     if random <= p1 then
         set result = 0
     elseif random <= p1 + p2 then

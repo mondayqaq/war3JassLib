@@ -84,7 +84,7 @@ type = rect
 [getRandom0To3]
 title = "概率获取0-3中的随机整数"
 description = "获取0-3中的随机整数，概率分布为 ${概率} ${概率} ${概率} ${概率}"
-comment = ""
+comment = "负数参数自动修正为0"
 category = TC_Monday
 returns = integer
 [[.args]]
