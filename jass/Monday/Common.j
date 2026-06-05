@@ -1,4 +1,4 @@
-library Monday
+library CommonLib
 
 globals
     hashtable GlobalHash = InitHashtable()

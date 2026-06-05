@@ -1,4 +1,4 @@
-library ItemLib requires Monday
+library ItemLib requires CommonLib
 
 // 创建物品给单位，支持设置物品使用次数
 // 开启自动堆叠的情况下，若单位持有同类型物品且持有物品的使用次数大于0，则直接增加使用次数

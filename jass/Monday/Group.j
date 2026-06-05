@@ -1,4 +1,4 @@
-library GroupLib requires Monday
+library GroupLib requires CommonLib
 
 /**
  * 获取范围内符合条件的单位组

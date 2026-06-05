@@ -1,4 +1,4 @@
-library AbilityLib requires Monday
+library AbilityLib requires CommonLib
 
 native EXGetUnitAbility takes unit u, integer abilcode returns ability
 native EXSetAbilityState takes ability a, integer state_type, real value returns boolean
