@@ -1,0 +1,21 @@
+[GetGameTime]
+title = "获取游戏时间"
+description = "获取当前游戏时间（秒）"
+comment = "从地图初始化开始计时，每0.1秒更新一次。"
+category = TC_Monday
+returns = real
+
+[CheckUnitTimeInterval]
+title = "检查单位时间间隔"
+description = "检查 ${单位} 距离上次操作是否已经过（${时间} 秒，键值：${键值}）"
+comment = "通用时间间隔检查，可用于伤害冷却、技能间隔、触发间隔等。满足间隔后自动更新时间戳。"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = unit
+[[.args]]
+type = real
+default = "1.00"
+[[.args]]
+type = integer
+default = "0"

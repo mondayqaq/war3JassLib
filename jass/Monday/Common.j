@@ -272,65 +272,6 @@ function SelectReal takes boolean condition, real a, real b returns real
     endif
 endfunction
 
-// 计时器回调函数 - 恢复单位
-function ResumeUnitAfterBirth takes nothing returns nothing
-    local timer expiredTimer = GetExpiredTimer()
-    local integer timerId = GetHandleId(expiredTimer)
-    local unit whichUnit = LoadUnitHandle(GlobalHash, timerId, 0)
-    
-    // 检查单位是否仍然有效
-    if whichUnit != null and GetUnitTypeId(whichUnit) != 0 then
-        // 恢复单位
-        call PauseUnit(whichUnit, false)
-        // 重置单位动画
-        call ResetUnitAnimation(whichUnit)
-    endif
-    
-    // 清理哈希表数据
-    call RemoveSavedHandle(GlobalHash, timerId, 0)
-    
-    // 销毁计时器
-    call DestroyTimer(expiredTimer)
-    
-    // 清理变量
-    set expiredTimer = null
-    set whichUnit = null
-endfunction
-
-// 播放单位出生动画
-function PlayUnitBirthAnimation takes unit whichUnit, real seconds returns nothing
-    local timer resumeTimer
-    local integer timerId
-    
-    if seconds <= 0 then
-        return
-    endif
-    
-    // 检查单位是否有效
-    if whichUnit == null or GetUnitTypeId(whichUnit) == 0 then
-        return
-    endif
-    
-    // 暂停单位
-    call PauseUnit(whichUnit, true)
-    
-    // 播放出生动画
-    call SetUnitAnimation(whichUnit, "birth")
-    
-    // 创建计时器用于恢复单位
-    set resumeTimer = CreateTimer()
-    set timerId = GetHandleId(resumeTimer)
-    
-    // 将单位保存到哈希表中
-    call SaveUnitHandle(GlobalHash, timerId, 0, whichUnit)
-    
-    // 设置计时器，在指定时间后执行恢复操作
-    call TimerStart(resumeTimer, seconds, false, function ResumeUnitAfterBirth)
-    
-    // 清理计时器变量
-    set resumeTimer = null
-endfunction
-
 // 生成区间内排除某个值的随机整数
 function GetRandomIntExclude takes integer minVal, integer maxVal, integer excludeVal returns integer
     local integer randomVal

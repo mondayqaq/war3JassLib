@@ -1,0 +1,36 @@
+[TimerLib_Init]
+title = "[计时器] 初始化计时器库"
+description = "初始化计时器库系统，开始计时游戏时间"
+comment = "需要在地图初始化时调用一次，以启用游戏时间计时器。"
+category = TC_Monday
+
+[PlayUnitBirthAnimation]
+title = "[计时器] 播放单位出生动画"
+description = "暂停并播放 ${单位} 的出生动画，持续 ${时间} 秒"
+comment = "播放结束后自动重置单位动作"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = real
+default = "0"
+
+[ResetUnitTimeInterval]
+title = "[计时器] 重置单位时间间隔"
+description = "重置 ${单位} 的时间间隔记录（键值：${键值}）"
+comment = "清除单位的时间间隔记录，使其可以立即执行相关操作。"
+category = TC_Monday
+[[.args]]
+type = unit
+[[.args]]
+type = integer
+default = "0"
+
+[CleanUnitAllTimeIntervals]
+title = "[计时器] 清理单位所有间隔数据"
+description = "清理 ${单位} 的所有时间间隔数据"
+comment = "单位死亡时调用，释放内存。"
+category = TC_Monday
+[[.args]]
+type = unit
