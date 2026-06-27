@@ -3,6 +3,13 @@ library AbilityLib requires CommonLib
 native EXGetUnitAbility takes unit u, integer abilcode returns ability
 native EXSetAbilityState takes ability a, integer state_type, real value returns boolean
 
+// 获取技能的魔法消耗
+function GetAbilityManaCost takes unit whichUnit, integer abilityId returns real
+    local integer skillLevel = GetUnitAbilityLevel(whichUnit, abilityId)
+    local string fieldCost = "Cost" + I2S(skillLevel)
+    return YDWEGetObjectPropertyReal(YDWE_OBJECT_TYPE_ABILITY, abilityId, fieldCost)
+endfunction
+
 // 提升单位的技能等级
 function IncAbilityLevel takes unit targetUnit, integer abilityId, integer levels returns nothing
     local integer currentLevel = GetUnitAbilityLevel(targetUnit, abilityId)
@@ -101,6 +108,37 @@ function ReplaceAbilityTimed takes unit targetUnit, integer origAbilId, integer 
         call SaveReal(GlobalHash, id, 4, cooldown)
         call TimerStart(t, duration, false, function RestoreReplacedAbility)
         set t = null
+    endif
+endfunction
+
+// 刷新单位技能冷却时间并返还魔法值
+function RefreshAbilityAndRefundMana takes unit whichUnit, integer abilityId, real refundRatio returns nothing
+    local integer skillLevel = GetUnitAbilityLevel(whichUnit, abilityId)
+    local real manaCost
+    local real currentMana
+    local real refundAmount
+    
+    if skillLevel == 0 then
+        return
+    endif
+    
+    // 获取技能魔法消耗
+    set manaCost = YDWEGetObjectPropertyReal(YDWE_OBJECT_TYPE_ABILITY, abilityId, "Cost" + I2S(skillLevel))
+    
+    // 计算返还的魔法值
+    set refundAmount = manaCost * refundRatio
+    
+    // 刷新技能冷却：移除后重新添加
+    call UnitRemoveAbility(whichUnit, abilityId)
+    call UnitAddAbility(whichUnit, abilityId)
+    if skillLevel > 1 then
+        call SetUnitAbilityLevel(whichUnit, abilityId, skillLevel)
+    endif
+    
+    // 返还魔法值
+    if refundAmount > 0 then
+        set currentMana = GetUnitState(whichUnit, UNIT_STATE_MANA)
+        call SetUnitState(whichUnit, UNIT_STATE_MANA, currentMana + refundAmount)
     endif
 endfunction
 

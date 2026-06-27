@@ -64,3 +64,18 @@ default = "10.00"
 [[.args]]
 type = real
 default = "0.00"
+
+[RefreshAbilityAndRefundMana]
+title = "[技能] 刷新技能冷却并返还魔法"
+description = "刷新 ${单位} 的 ${技能} 冷却时间，并返还 ${比例} 倍的魔法消耗"
+comment = "通过删除-添加技能刷新冷却，返还魔法值 = 技能消耗 × 比例"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+default = "GetSpellAbilityId"
+[[.args]]
+type = real
+default = "1.00"

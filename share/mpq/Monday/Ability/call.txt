@@ -1,0 +1,11 @@
+[GetAbilityManaCost]
+title = "获取技能魔法消耗"
+description = "获取 ${单位} 的技能 ${技能ID} 的魔法消耗"
+category = TC_Monday
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+default = "GetSpellAbilityId"
