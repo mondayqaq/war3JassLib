@@ -1,0 +1,23 @@
+[SetUnitScaleSingle]
+title = "[单位] 设置单位尺寸（按倍数）"
+description = "设置 ${单位} 的尺寸缩放为 ${size}"
+comment = "同时缩放长、宽、高，忽略小于等于0的值"
+category = TC_Monday
+[[.args]]
+type = unit
+[[.args]]
+type = real
+default = "1.00"
+
+[MoveUnitToRectPosition]
+title = "[单位] 移动单位到矩形区域"
+description = "移动 ${单位} 到 ${矩形区域} 的 ${位置}"
+comment = "如果矩形区域不存在，那么单位不会被移动"
+category = TC_Monday
+[[.args]]
+type = unit
+[[.args]]
+type = rect
+[[.args]]
+type = PositionType
+default = "PositionType_0"

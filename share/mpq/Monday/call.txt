@@ -1,68 +1,3 @@
-[getAngleBetweenUnits]
-title = "两个单位间的角度"
-description = "${单位} 与 ${单位} 的角度"
-comment = ""
-category = TC_Monday
-returns = degree
-[[.args]]
-type = unit
-[[.args]]
-type = unit
-
-[CreateTemporaryUnit]
-title = "创建临时单位"
-description = "为 ${玩家} 创建拥有 ${技能} 和持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
-comment = ""
-category = TC_Monday
-returns = unit
-[[.args]]
-type = player
-[[.args]]
-type = abilcode
-[[.args]]
-type = real
-default = "1"
-[[.args]]
-type = timedlifebuffcode
-default = "TimedLifeBuffCodeWaterElemental"
-[[.args]]
-type = unitcode
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
-[CreateTemporaryUnit2]
-title = "创建临时单位(无技能)"
-description = "为 ${玩家} 创建持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
-comment = ""
-category = TC_Monday
-returns = unit
-[[.args]]
-type = player
-[[.args]]
-type = real
-default = "1"
-[[.args]]
-type = timedlifebuffcode
-default = "TimedLifeBuffCodeWaterElemental"
-[[.args]]
-type = unitcode
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
 [GetRectRandomX]
 title = "获取矩形区域内的随机X坐标"
 description = "获取 ${矩形区域} 内的随机X坐标"
@@ -123,33 +58,6 @@ category = TC_Monday
 returns = weapontype
 [[.args]]
 type = integer
-default = "0"
-
-[IsUnitInvulnerable]
-title = "单位是无敌的"
-description = "${单位} 是无敌的"
-comment = ""
-category = TC_Monday
-returns = boolean
-[[.args]]
-type = unit
-
-[GetRandomEnemyUnitInRange]
-title = "获取指定坐标，指定半径范围内的随机敌方单位"
-description = "获取玩家 ${玩家} 在坐标(${x},${y})，半径为 ${半径} 范围内的随机敌对单位"
-comment = "不包含无敌和死亡的单位"
-category = TC_Monday
-returns = unit
-[[.args]]
-type = player
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
 default = "0"
 
 [CompareIntegers]

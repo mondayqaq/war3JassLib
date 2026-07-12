@@ -1,4 +1,4 @@
-library GroupLib requires CommonLib
+library GroupLib requires CommonLib, UnitLib
 
 /**
  * 获取范围内符合条件的单位组

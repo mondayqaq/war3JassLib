@@ -4,15 +4,6 @@ globals
     hashtable GlobalHash = InitHashtable()
 endglobals
 
-// 获取两个单位之间的角度
-function getAngleBetweenUnits takes unit u1, unit u2 returns real 
-    local real x = GetUnitX(u1)
-    local real y = GetUnitY(u1)
-    local real x1 = GetUnitX(u2)
-    local real y1 = GetUnitY(u2)
-    return Atan2BJ(y1 - y, x1 - x)
-endfunction
-
 // 显示DEBUG信息
 function showDebugInfo takes boolean b, string info returns nothing
     if b then
@@ -20,21 +11,6 @@ function showDebugInfo takes boolean b, string info returns nothing
     else 
         call DoNothing(  )
     endif
-endfunction
-
-// 创建临时单位
-function CreateTemporaryUnit takes player id, integer abilityId, real duration, integer buffId, integer unitId, real x, real y, real face returns unit
-    local unit u = CreateUnit(id, unitId, x, y, face)
-    call UnitAddAbility(u, abilityId)
-    call UnitApplyTimedLife(u, buffId, duration)
-    return u
-endfunction
-
-// 创建临时单位（无技能）
-function CreateTemporaryUnit2 takes player id, real duration, integer buffId, integer unitId, real x, real y, real face returns unit
-    local unit u = CreateUnit(id, unitId, x, y, face)
-    call UnitApplyTimedLife(u, buffId, duration)
-    return u
 endfunction
 
 // 获取矩形区域内的随机X坐标
@@ -101,13 +77,6 @@ function isCoordinateInRect takes rect r, real x, real y returns boolean
     endif
 endfunction
 
-// 设置单位尺寸（单参数）
-function SetUnitScaleSingle takes unit u, real size returns nothing
-    if size > 0 then
-        call SetUnitScale(u, size, size, size)
-    endif 
-endfunction	
-
 // 转换整型数据为武器类型（声音）
 function ConvertIntToWeaponType takes integer i returns weapontype
     if i == 0 then
@@ -139,61 +108,6 @@ function ConvertIntToWeaponType takes integer i returns weapontype
     endif
     // 默认返回未知类型
     return WEAPON_TYPE_WHOKNOWS
-endfunction
-
-// 单位是否无敌
-function IsUnitInvulnerable takes unit u returns boolean
-    if (((GetUnitAbilityLevel(u, 'Bvul') > 0) or (GetUnitAbilityLevel(u, 'BHds') > 0) or (GetUnitAbilityLevel(u, 'BOvd') > 0) or (GetUnitAbilityLevel(u, 'Avul') > 0))) then
-        return true
-    else
-        return false
-    endif
-endfunction
-
-// 获取以坐标(x, y)为中心，radius为半径范围内的随机敌对单位
-function GetRandomEnemyUnitInRange takes player sourcePlayer, real x, real y, real radius returns unit
-    local group enemyGroup
-    local unit randomUnit
-    local unit array validUnits
-    local integer validCount = 0
-    local integer i
-    
-    // 初始化变量
-    set enemyGroup = CreateGroup()
-    set randomUnit = null
-    
-    // 枚举指定点半径范围内的所有单位
-    call GroupEnumUnitsInRange(enemyGroup, x, y, radius, null)
-    
-    // 收集所有符合条件的单位
-    loop
-        set randomUnit = FirstOfGroup(enemyGroup)
-        exitwhen randomUnit == null
-        
-        // 检查单位是否符合条件：非死亡、非无敌、是敌方单位
-        if IsUnitEnemy(randomUnit, sourcePlayer) and not IsUnitType(randomUnit, UNIT_TYPE_DEAD) and not IsUnitType(randomUnit, UNIT_TYPE_ETHEREAL) and GetUnitAbilityLevel(randomUnit, 'Avul') == 0 then
-            // 将符合条件的单位添加到数组
-            set validUnits[validCount] = randomUnit
-            set validCount = validCount + 1
-        endif
-        
-        // 从组中移除当前单位，继续处理下一个
-        call GroupRemoveUnit(enemyGroup, randomUnit)
-    endloop
-    
-    // 如果有符合条件的单位，随机选择一个
-    if validCount > 0 then
-        set i = GetRandomInt(0, validCount - 1)
-        set randomUnit = validUnits[i]
-    else
-        set randomUnit = null
-    endif
-    
-    // 清理组并返回结果
-    call DestroyGroup(enemyGroup)
-    set enemyGroup = null
-    
-    return randomUnit
 endfunction
 
 // 比较两个整数
@@ -338,22 +252,6 @@ function GetRectPositionY takes rect whichRect, integer positionType returns rea
     else
         return (minY + maxY) / 2.0
     endif
-endfunction
-
-// 移动单位到矩形区域
-function MoveUnitToRectPosition takes unit whichUnit, rect whichRect, integer positionType returns boolean
-    local real array targetPos
-    
-    // 检查参数是否有效
-    if whichUnit == null or whichRect == null then
-        return false
-    endif
-    
-    // 移动单位到目标位置
-    call SetUnitX(whichUnit, GetRectPositionX(whichRect, positionType))
-    call SetUnitY(whichUnit, GetRectPositionY(whichRect, positionType))
-    
-    return true
 endfunction
 
 // ============================================================================
