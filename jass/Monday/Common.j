@@ -371,4 +371,15 @@ function BooleanOr takes boolean a, boolean b returns boolean
     return a or b
 endfunction
 
+// 连接两个传送门，使它们互相指向对方
+function LinkWaygates takes unit waygate1, unit waygate2 returns nothing
+    // 激活两个传送门
+    call WaygateActivateBJ(true, waygate1)
+    call WaygateActivateBJ(true, waygate2)
+    
+    // 设置传送门目的地为对方的坐标
+    call WaygateSetDestination(waygate1, GetUnitX(waygate2), GetUnitY(waygate2))
+    call WaygateSetDestination(waygate2, GetUnitX(waygate1), GetUnitY(waygate1))
+endfunction
+
 endlibrary 
