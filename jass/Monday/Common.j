@@ -1,5 +1,7 @@
 library CommonLib
 
+native EXGetEventDamageData takes integer edd_type returns integer
+
 globals
     hashtable GlobalHash = InitHashtable()
 endglobals
@@ -380,6 +382,11 @@ function LinkWaygates takes unit waygate1, unit waygate2 returns nothing
     // 设置传送门目的地为对方的坐标
     call WaygateSetDestination(waygate1, GetUnitX(waygate2), GetUnitY(waygate2))
     call WaygateSetDestination(waygate2, GetUnitX(waygate1), GetUnitY(waygate1))
+endfunction
+
+// 获取当前伤害事件的伤害类型编号，例如 DAMAGE_TYPE_SONIC 返回 15
+function GetEventDamageType takes nothing returns integer
+    return EXGetEventDamageData(4)
 endfunction
 
 endlibrary 

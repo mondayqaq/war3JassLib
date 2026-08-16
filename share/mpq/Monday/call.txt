@@ -280,3 +280,10 @@ default = "true"
 [[.args]]
 type = boolean
 default = "true"
+
+[GetEventDamageType]
+title = "获取当前伤害类型"
+description = "获取当前伤害事件的伤害类型整数"
+comment = "需在伤害事件中调用；未知：0，普通：4，强化：5，火焰~通用：8~26"
+category = TC_Monday
+returns = integer
