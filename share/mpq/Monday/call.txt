@@ -287,3 +287,29 @@ description = "获取当前伤害事件的伤害类型整数"
 comment = "需在伤害事件中调用；未知：0，普通：4，强化：5，火焰~通用：8~26"
 category = TC_Monday
 returns = integer
+
+[CompareUnitType]
+title = "比较单位类型"
+description = "${单位类型} 等于 ${单位类型}"
+comment = "比较两个单位类型 ID 是否相同"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = unitcode
+[[.args]]
+type = unitcode
+
+[ShrinkRect]
+title = "缩小矩形区域"
+description = "将 ${矩形区域} 宽度缩小 ${缩小宽度}、高度缩小 ${缩小高度}"
+comment = "返回新矩形；宽度和高度各自缩小对应总值，左右和上下两侧各缩小一半"
+category = TC_Monday
+returns = rect
+[[.args]]
+type = rect
+[[.args]]
+type = real
+default = "0.00"
+[[.args]]
+type = real
+default = "0.00"

@@ -30,8 +30,8 @@ type = unit
 
 [CreateTemporaryUnit]
 title = "创建临时单位"
-description = "为 ${玩家} 创建拥有 ${技能} 和持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
-comment = ""
+description = "为 ${玩家} 创建拥有 ${技能}、持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
+comment = "持续时间小于或等于0时，不设置生命周期"
 category = TC_Monday
 returns = unit
 [[.args]]
@@ -59,7 +59,7 @@ default = "0"
 [CreateTemporaryUnit2]
 title = "创建临时单位(无技能)"
 description = "为 ${玩家} 创建持续 ${持续时间} 秒，生命周期为 ${生命周期} 的 ${单位类型} 在坐标(${x},${y})处，面向角度: ${面向角度} 度"
-comment = ""
+comment = "持续时间小于或等于0时，不设置生命周期"
 category = TC_Monday
 returns = unit
 [[.args]]

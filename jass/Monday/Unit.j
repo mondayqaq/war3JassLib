@@ -39,14 +39,18 @@ endfunction
 function CreateTemporaryUnit takes player id, integer abilityId, real duration, integer buffId, integer unitId, real x, real y, real face returns unit
     local unit u = CreateUnit(id, unitId, x, y, face)
     call UnitAddAbility(u, abilityId)
-    call UnitApplyTimedLife(u, buffId, duration)
+    if duration > 0.0 then
+        call UnitApplyTimedLife(u, buffId, duration)
+    endif
     return u
 endfunction
 
 // 创建临时单位（无技能）
 function CreateTemporaryUnit2 takes player id, real duration, integer buffId, integer unitId, real x, real y, real face returns unit
     local unit u = CreateUnit(id, unitId, x, y, face)
-    call UnitApplyTimedLife(u, buffId, duration)
+    if duration > 0.0 then
+        call UnitApplyTimedLife(u, buffId, duration)
+    endif
     return u
 endfunction
 

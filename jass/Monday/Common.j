@@ -362,6 +362,11 @@ function BooleanAnd takes boolean a, boolean b returns boolean
     return a and b
 endfunction
 
+// 比较两个单位类型是否相同
+function CompareUnitType takes integer unitType1, integer unitType2 returns boolean
+    return unitType1 == unitType2
+endfunction
+
 /**
  * 逻辑或运算
  * 
@@ -387,6 +392,30 @@ endfunction
 // 获取当前伤害事件的伤害类型编号，例如 DAMAGE_TYPE_SONIC 返回 15
 function GetEventDamageType takes nothing returns integer
     return EXGetEventDamageData(4)
+endfunction
+
+// 将矩形宽度和高度向中心缩小指定值并返回新矩形
+function ShrinkRect takes rect sourceRect, real shrinkWidth, real shrinkHeight returns rect
+    local real minX = GetRectMinX(sourceRect)
+    local real maxX = GetRectMaxX(sourceRect)
+    local real minY = GetRectMinY(sourceRect)
+    local real maxY = GetRectMaxY(sourceRect)
+    local real width = maxX - minX
+    local real height = maxY - minY
+
+    if shrinkWidth < 0.0 then
+        set shrinkWidth = 0.0
+    elseif shrinkWidth > width then
+        set shrinkWidth = width
+    endif
+
+    if shrinkHeight < 0.0 then
+        set shrinkHeight = 0.0
+    elseif shrinkHeight > height then
+        set shrinkHeight = height
+    endif
+
+    return Rect(minX + shrinkWidth / 2.0, minY + shrinkHeight / 2.0, maxX - shrinkWidth / 2.0, maxY - shrinkHeight / 2.0)
 endfunction
 
 endlibrary 
