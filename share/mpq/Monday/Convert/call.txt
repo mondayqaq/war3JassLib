@@ -1,0 +1,62 @@
+[ConvertStringToDamageType]
+title = "转换字符串为伤害类型"
+description = "将 ${伤害类型字符串} 转换为伤害类型"
+comment = "未知、普通、强化、火焰、冰冻、闪电、毒药、疾病、神圣、魔法、音速、酸性、力量、死亡、精神、植物、防御、破坏、慢性毒药、灵魂链接、暗影突袭、通用"
+category = TC_Monday
+returns = damagetype
+[[.args]]
+type = string
+default = "普通"
+
+[ConvertDamageTypeToString]
+title = "转换伤害类型为字符串"
+description = "将 ${伤害类型} 转换为中文字符串"
+comment = "未知、普通、强化、火焰、冰冻、闪电、毒药、疾病、神圣、魔法、音速、酸性、力量、死亡、精神、植物、防御、破坏、慢性毒药、灵魂链接、暗影突袭、通用"
+category = TC_Monday
+returns = string
+[[.args]]
+type = damagetype
+
+[GetEventDamageType]
+title = "获取当前伤害类型"
+description = "获取当前伤害事件的伤害类型"
+comment = "需在伤害事件中调用"
+category = TC_Monday
+returns = damagetype
+
+[GetEventAttackType]
+title = "获取当前攻击类型"
+description = "获取当前伤害事件的攻击类型"
+comment = "需在伤害事件中调用"
+category = TC_Monday
+returns = attacktype
+
+[ConvertAttackTypeToString]
+title = "转换攻击类型为字符串"
+description = "将 ${攻击类型} 转换为中文字符串"
+comment = "法术、普通、穿刺、攻城、魔法、混乱、英雄"
+category = TC_Monday
+returns = string
+[[.args]]
+type = attacktype
+default = "AttackTypeNormal"
+
+[ConvertStringToAttackType]
+title = "转换字符串为攻击类型"
+description = "将 ${攻击类型字符串} 转换为攻击类型"
+comment = "法术、普通、穿刺、攻城、魔法、混乱、英雄"
+category = TC_Monday
+returns = attacktype
+[[.args]]
+type = string
+default = "普通"
+
+[GetUnitDefenseTypeString]
+title = "获取单位护甲类型名称"
+description = "获取 ${单位} 的护甲类型名称"
+comment = "小型、中型、大型、城墙、普通、英雄、神圣、无装甲、未知"
+category = TC_Monday
+returns = string
+[[.args]]
+type = unit
+default = "GetTriggerUnit"

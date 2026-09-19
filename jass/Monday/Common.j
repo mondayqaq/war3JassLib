@@ -1,7 +1,5 @@
 library CommonLib
 
-native EXGetEventDamageData takes integer edd_type returns integer
-
 globals
     hashtable GlobalHash = InitHashtable()
 endglobals
@@ -172,6 +170,15 @@ endfunction
 
 // 根据布尔值选择返回整数
 function SelectInteger takes boolean condition, integer a, integer b returns integer
+    if condition then
+        return a
+    else
+        return b
+    endif
+endfunction
+
+// 根据布尔值选择返回字符串
+function SelectString takes boolean condition, string a, string b returns string
     if condition then
         return a
     else
@@ -367,6 +374,11 @@ function CompareUnitType takes integer unitType1, integer unitType2 returns bool
     return unitType1 == unitType2
 endfunction
 
+// 比较两个字符串是否完全相同
+function CompareStrings takes string string1, string string2 returns boolean
+    return string1 == string2
+endfunction
+
 /**
  * 逻辑或运算
  * 
@@ -387,11 +399,6 @@ function LinkWaygates takes unit waygate1, unit waygate2 returns nothing
     // 设置传送门目的地为对方的坐标
     call WaygateSetDestination(waygate1, GetUnitX(waygate2), GetUnitY(waygate2))
     call WaygateSetDestination(waygate2, GetUnitX(waygate1), GetUnitY(waygate1))
-endfunction
-
-// 获取当前伤害事件的伤害类型编号，例如 DAMAGE_TYPE_SONIC 返回 15
-function GetEventDamageType takes nothing returns integer
-    return EXGetEventDamageData(4)
 endfunction
 
 // 将矩形宽度和高度向中心缩小指定值并返回新矩形

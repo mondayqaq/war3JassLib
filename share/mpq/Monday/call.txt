@@ -107,6 +107,21 @@ default = "0"
 type = integer
 default = "0"
 
+[SelectString]
+title = "根据布尔值选择返回字符串"
+description = "若 ${布尔值} 为真，则返回 ${字符串}，否则返回 ${字符串}"
+comment = ""
+category = TC_Monday
+returns = string
+[[.args]]
+type = boolean
+[[.args]]
+type = string
+default = ""
+[[.args]]
+type = string
+default = ""
+
 [SelectReal]
 title = "根据布尔值选择返回实数"
 description = "若 ${布尔值} 为真，则返回 ${实数}，否则返回 ${实数}"
@@ -281,13 +296,6 @@ default = "true"
 type = boolean
 default = "true"
 
-[GetEventDamageType]
-title = "获取当前伤害类型"
-description = "获取当前伤害事件的伤害类型整数"
-comment = "需在伤害事件中调用；未知：0，普通：4，强化：5，火焰~通用：8~26"
-category = TC_Monday
-returns = integer
-
 [CompareUnitType]
 title = "比较单位类型"
 description = "${单位类型} 等于 ${单位类型}"
@@ -298,6 +306,19 @@ returns = boolean
 type = unitcode
 [[.args]]
 type = unitcode
+
+[CompareStrings]
+title = "比较字符串"
+description = "${字符串} 等于 ${字符串}"
+comment = "比较两个字符串是否完全相同"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = string
+default = ""
+[[.args]]
+type = string
+default = ""
 
 [ShrinkRect]
 title = "缩小矩形区域"
