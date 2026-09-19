@@ -418,4 +418,18 @@ function ShrinkRect takes rect sourceRect, real shrinkWidth, real shrinkHeight r
     return Rect(minX + shrinkWidth / 2.0, minY + shrinkHeight / 2.0, maxX - shrinkWidth / 2.0, maxY - shrinkHeight / 2.0)
 endfunction
 
+// 返回由指定数量空格组成的字符串，非正数返回空字符串
+function CreateSpaces takes integer count returns string
+    local integer i = 0
+    local string result = ""
+
+    loop
+        exitwhen i >= count
+        set result = result + " "
+        set i = i + 1
+    endloop
+
+    return result
+endfunction
+
 endlibrary 

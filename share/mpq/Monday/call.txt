@@ -313,3 +313,13 @@ default = "0.00"
 [[.args]]
 type = real
 default = "0.00"
+
+[CreateSpaces]
+title = "生成空格字符串"
+description = "生成由 ${空格数量} 个空格组成的字符串"
+comment = "空格数量小于或等于0时返回空字符串"
+category = TC_Monday
+returns = string
+[[.args]]
+type = integer
+default = "0"
