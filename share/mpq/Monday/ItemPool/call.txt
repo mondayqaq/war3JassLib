@@ -1,0 +1,32 @@
+[ItemPoolExGetSize]
+title = "物品池中的物品类型数量"
+description = "物品池 ${池ID} 中的物品类型数量"
+comment = ""
+category = TC_MondayItemPool
+returns = integer
+[[.args]]
+type = integer
+
+[ItemPoolExGetRandomId]
+title = "物品池随机物品类型"
+description = "从物品池 ${池ID} 中按权重随机获取一个物品类型"
+comment = "池为空时返回0"
+category = TC_MondayItemPool
+returns = itemcode
+[[.args]]
+type = integer
+
+[PlaceRandomItemEx]
+title = "物品池随机创建物品"
+description = "从物品池 ${池ID} 中按权重随机创建物品到坐标 (${x}, ${y})"
+comment = "池为空时返回空"
+category = TC_MondayItemPool
+returns = item
+[[.args]]
+type = integer
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"

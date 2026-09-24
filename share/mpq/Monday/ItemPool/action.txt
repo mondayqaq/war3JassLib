@@ -1,0 +1,48 @@
+[DestroyItemPoolEx]
+title = "[蝉] 销毁物品池"
+description = "销毁物品池 ${池ID}"
+comment = "清除该池的所有数据"
+category = TC_MondayItemPool
+[[.args]]
+type = integer
+
+[ItemPoolExAdd]
+title = "[蝉] 物品池添加物品类型"
+description = "向物品池 ${池ID} 添加物品类型 ${物品类型}，权重为 ${权重}（去重：${去重}）"
+comment = "去重开启时，若池中已存在相同物品类型则跳过"
+category = TC_MondayItemPool
+[[.args]]
+type = integer
+[[.args]]
+type = itemcode
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = boolean
+default = "false"
+
+[ItemPoolExRemove]
+title = "[蝉] 物品池移除物品类型"
+description = "从物品池 ${池ID} 中移除物品类型 ${物品类型}"
+comment = "若池中不存在该物品类型，则不做任何操作"
+category = TC_MondayItemPool
+[[.args]]
+type = integer
+[[.args]]
+type = itemcode
+
+[ItemPoolExSetWeight]
+title = "[蝉] 物品池设置权重"
+description = "设置物品池 ${池ID} 中物品类型 ${物品类型} 的权重为 ${权重}"
+comment = "若物品类型不存在于池中，则不做任何操作"
+category = TC_MondayItemPool
+[[.args]]
+type = integer
+[[.args]]
+type = itemcode
+[[.args]]
+type = integer
+default = "1"
+
+
