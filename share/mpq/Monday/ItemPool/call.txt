@@ -1,3 +1,14 @@
+[ItemPoolExGetKey]
+title = "获取物品池键"
+description = "根据键类型 ${Key} 和键值 ${Value} 获取固定物品池键"
+comment = "同一键类型和键值组合在当前游戏中始终返回同一个随机且全局不重复的池ID；键值不能是 -2147483647"
+category = TC_MondayItemPool
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
 [ItemPoolExGetSize]
 title = "物品池中的物品类型数量"
 description = "物品池 ${池ID} 中的物品类型数量"
@@ -6,6 +17,18 @@ category = TC_MondayItemPool
 returns = integer
 [[.args]]
 type = integer
+
+[ItemPoolExGetItemCode]
+title = "获取物品池指定物品类型"
+description = "获取物品池 ${池ID} 中第 ${索引} 个物品类型"
+comment = "索引从1开始；池为空或索引无效时返回0"
+category = TC_MondayItemPool
+returns = itemcode
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+default = "1"
 
 [ItemPoolExGetRandomItemCode]
 title = "物品池随机物品类型"

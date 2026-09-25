@@ -32,6 +32,14 @@ type = integer
 [[.args]]
 type = itemcode
 
+[ItemPoolExShuffle]
+title = "打乱物品池顺序"
+description = "打乱物品池 ${池ID} 中物品类型的顺序"
+comment = "使用 Fisher-Yates 算法；物品类型与权重会成对交换，总权重不变"
+category = TC_MondayItemPool
+[[.args]]
+type = integer
+
 [ItemPoolExSetWeight]
 title = "物品池设置权重"
 description = "设置物品池 ${池ID} 中物品类型 ${物品类型} 的权重为 ${权重}"
