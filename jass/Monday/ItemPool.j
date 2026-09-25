@@ -33,13 +33,13 @@ endfunction
 
 // 销毁物品池
 // 清除指定池ID下的所有哈希表数据
-function DestroyItemPoolEx takes integer poolId returns nothing
+function ItemPoolExDestroy takes integer poolId returns nothing
     call FlushChildHashtable(ItemPoolHash, poolId)
 endfunction
 
 // 添加物品类型到池中
 // unique 为 true 时，若池中已存在相同 itemId 则跳过
-function ItemPoolExAdd takes integer poolId, integer itemId, integer weight, boolean unique returns nothing
+function ItemPoolExAdd takes integer poolId, integer weight, integer itemId, boolean unique returns nothing
     local integer size
 
     if unique and ItemPoolExFindIndex(poolId, itemId) != 0 then
@@ -98,16 +98,25 @@ function ItemPoolExSetWeight takes integer poolId, integer itemId, integer weigh
     endif
 endfunction
 
-// 按权重随机返回一个物品类型ID
-// 池为空时返回0
-function ItemPoolExGetRandomId takes integer poolId returns integer
+// 随机返回一个物品类型ID
+// useWeight 为 true 时按权重随机，false 时所有条目等概率随机；池为空时返回0
+function ItemPoolExGetRandomItemCode takes integer poolId, boolean useWeight returns integer
     local integer size = LoadInteger(ItemPoolHash, poolId, 0)
-    local integer totalWeight = LoadInteger(ItemPoolHash, poolId, -8191)
+    local integer totalWeight
     local integer roll
     local integer cumulative = 0
     local integer i = 1
 
-    if size == 0 or totalWeight <= 0 then
+    if size == 0 then
+        return 0
+    endif
+
+    if not useWeight then
+        return LoadInteger(ItemPoolHash, poolId, GetRandomInt(1, size))
+    endif
+
+    set totalWeight = LoadInteger(ItemPoolHash, poolId, -8191)
+    if totalWeight <= 0 then
         return 0
     endif
 
@@ -126,10 +135,10 @@ function ItemPoolExGetRandomId takes integer poolId returns integer
     return LoadInteger(ItemPoolHash, poolId, size)
 endfunction
 
-// 按权重随机创建物品
-// 池为空时返回 null
-function PlaceRandomItemEx takes integer poolId, real x, real y returns item
-    local integer itemId = ItemPoolExGetRandomId(poolId)
+// 随机创建物品
+// useWeight 为 true 时按权重随机，false 时所有条目等概率随机；池为空时返回 null
+function ItemPoolExPlaceItem takes integer poolId, boolean useWeight, real x, real y returns item
+    local integer itemId = ItemPoolExGetRandomItemCode(poolId, useWeight)
 
     if itemId == 0 then
         return null

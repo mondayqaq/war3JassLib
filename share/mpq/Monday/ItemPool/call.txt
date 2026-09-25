@@ -7,23 +7,29 @@ returns = integer
 [[.args]]
 type = integer
 
-[ItemPoolExGetRandomId]
+[ItemPoolExGetRandomItemCode]
 title = "物品池随机物品类型"
-description = "从物品池 ${池ID} 中按权重随机获取一个物品类型"
-comment = "池为空时返回0"
+description = "从物品池 ${池ID} 中随机获取一个物品类型（按权重：${是否按权重}）"
+comment = "池为空时返回0；关闭按权重后，池中所有物品类型等概率随机"
 category = TC_MondayItemPool
 returns = itemcode
 [[.args]]
 type = integer
+[[.args]]
+type = boolean
+default = "true"
 
-[PlaceRandomItemEx]
+[ItemPoolExPlaceItem]
 title = "物品池随机创建物品"
-description = "从物品池 ${池ID} 中按权重随机创建物品到坐标 (${x}, ${y})"
-comment = "池为空时返回空"
+description = "从物品池 ${池ID} 中随机创建物品到坐标 (${x}, ${y})（按权重：${是否按权重}）"
+comment = "池为空时返回空；关闭按权重后，池中所有物品类型等概率随机"
 category = TC_MondayItemPool
 returns = item
 [[.args]]
 type = integer
+[[.args]]
+type = boolean
+default = "true"
 [[.args]]
 type = real
 default = "0"
