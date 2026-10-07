@@ -16,6 +16,15 @@ returns = real
 [[.args]]
 type = rect
 
+[GetRectDiagonalLength]
+title = "获取矩形区域对角线长度"
+description = "获取 ${矩形区域} 的对角线长度"
+comment = "空矩形返回0"
+category = TC_Monday
+returns = real
+[[.args]]
+type = rect
+
 [getRandom0To3]
 title = "概率获取0-3中的随机整数"
 description = "获取0-3中的随机整数，概率分布为 ${概率} ${概率} ${概率} ${概率}"
@@ -106,6 +115,30 @@ default = "0"
 [[.args]]
 type = integer
 default = "0"
+
+[SelectAbilityType]
+title = "根据布尔值选择返回技能类型"
+description = "若 ${布尔值} 为真，则返回 ${技能类型}，否则返回 ${技能类型}"
+comment = ""
+category = TC_Monday
+returns = abilcode
+[[.args]]
+type = boolean
+[[.args]]
+type = abilcode
+[[.args]]
+type = abilcode
+
+[CompareAbilityType]
+title = "比较技能类型"
+description = "${技能类型} 等于 ${技能类型}"
+comment = "比较两个技能类型原始码是否相同"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = abilcode
+[[.args]]
+type = abilcode
 
 [SelectString]
 title = "根据布尔值选择返回字符串"

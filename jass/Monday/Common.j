@@ -23,6 +23,20 @@ function GetRectRandomY takes rect r returns real
     return GetRectMinY(r) + GetRandomReal(0, GetRectHeightBJ(r))
 endfunction
 
+// 获取矩形区域的对角线长度
+function GetRectDiagonalLength takes rect r returns real
+    local real width
+    local real height
+
+    if r == null then
+        return 0.0
+    endif
+
+    set width = GetRectWidthBJ(r)
+    set height = GetRectHeightBJ(r)
+    return SquareRoot(width * width + height * height)
+endfunction
+
 // 获取 0 ~ 3 中的随机数（负数参数自动修正为0）
 function getRandom0To3 takes integer p1, integer p2, integer p3, integer p4 returns integer
     local integer total
@@ -175,6 +189,20 @@ function SelectInteger takes boolean condition, integer a, integer b returns int
     else
         return b
     endif
+endfunction
+
+// 根据布尔值选择返回技能类型
+function SelectAbilityType takes boolean condition, integer abilityType1, integer abilityType2 returns integer
+    if condition then
+        return abilityType1
+    else
+        return abilityType2
+    endif
+endfunction
+
+// 比较两个技能类型是否相同
+function CompareAbilityType takes integer abilityType1, integer abilityType2 returns boolean
+    return abilityType1 == abilityType2
 endfunction
 
 // 根据布尔值选择返回字符串

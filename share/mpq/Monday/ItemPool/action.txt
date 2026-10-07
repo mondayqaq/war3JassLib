@@ -61,13 +61,13 @@ category = TC_MondayItemPool
 [[.args]]
 type = integer
 [[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
 type = boolean
 default = "true"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
 
 

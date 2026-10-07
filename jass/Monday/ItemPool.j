@@ -230,7 +230,7 @@ endfunction
 
 // 随机创建物品
 // useWeight 为 true 时按权重随机，false 时所有条目等概率随机；池为空时返回 null
-function ItemPoolExPlaceItem takes integer poolId, boolean useWeight, real x, real y returns item
+function ItemPoolExPlaceItem takes integer poolId, real x, real y, boolean useWeight returns item
     local integer itemId
 
     call ItemPoolExRegisterKey(poolId)
