@@ -1,0 +1,65 @@
+[IntListGetKey]
+title = "获取整数列表ID"
+description = "获取整数列表ID（键类型 ${键类型}，键值 ${键值}）"
+comment = "同一键类型和键值组合始终返回同一个全局不重复的列表ID"
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListGetSize]
+title = "整数列表条目数量"
+description = "整数列表 ${列表ID} 中的条目数量"
+comment = ""
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+
+[IntListGetValue]
+title = "整数列表指定索引的值"
+description = "整数列表 ${列表ID} 中索引 ${索引} 的值"
+comment = "索引从1开始；列表为空或索引无效时返回0"
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+default = "1"
+
+[IntListCreateRange]
+title = "创建连续整数列表"
+description = "创建包含 ${起始值} 到 ${结束值} 连续整数的列表"
+comment = "返回列表ID；权重默认100；支持从小到大或从大到小；每次调用生成新列表，建议使用后销毁"
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListCreateRandomRange]
+title = "创建随机连续整数列表"
+description = "创建包含 ${起始值} 到 ${结束值} 随机顺序连续整数的列表"
+comment = "返回列表ID；权重默认100；填充后自动打乱顺序；每次调用生成新列表，建议使用后销毁"
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListGetRandom]
+title = "整数列表随机获取值"
+description = "从整数列表 ${列表ID} 中随机获取一个值（按权重：${按权重}）"
+comment = "按权重为真时按权重随机，否则等概率随机；列表为空时返回0"
+category = TC_MondayIntList
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = boolean
+default = "true"

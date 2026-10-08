@@ -1,6 +1,7 @@
 [TriggerCategories]
 TC_Monday=[蝉],ReplaceableTextures\CommandButtons\BTNSeal.blp
 TC_MondayItemPool=[蝉 - 物品池],ReplaceableTextures\CommandButtons\BTNSeal.blp
+TC_MondayIntList=[蝉 - 整数列表],ReplaceableTextures\CommandButtons\BTNSeal.blp
 
 [TriggerTypes]
 OperationType=0,0,0,操作类型,integer

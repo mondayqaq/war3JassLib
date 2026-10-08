@@ -1,0 +1,76 @@
+[IntListDestroy]
+title = "[蝉] 销毁整数列表"
+description = "销毁整数列表 ${列表ID}"
+comment = "清除该列表的所有数据"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+
+[IntListAddDefault]
+title = "[蝉] 整数列表添加值（默认）"
+description = "向整数列表 ${列表ID} 添加值 ${整数}"
+comment = "权重默认100，不去重"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListAddRange]
+title = "[蝉] 整数列表填充连续区间"
+description = "向整数列表 ${列表ID} 填充 ${起始值} 到 ${结束值} 的连续整数"
+comment = "权重默认100，不去重；支持从小到大或从大到小填充"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListAdd]
+title = "[蝉] 整数列表添加值"
+description = "向整数列表 ${列表ID} 添加值 ${整数}，权重为 ${权重}（去重：${去重}）"
+comment = "去重开启时，若列表中已存在相同值则跳过"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = integer
+[[.args]]
+type = boolean
+default = "false"
+
+[IntListRemove]
+title = "[蝉] 整数列表移除值"
+description = "从整数列表 ${列表ID} 中移除值 ${整数}"
+comment = "若列表中不存在该值，则不做任何操作"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[IntListShuffle]
+title = "[蝉] 打乱整数列表"
+description = "打乱整数列表 ${列表ID} 中的条目顺序"
+comment = "使用 Fisher-Yates 算法，权重与值成对交换"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+
+[IntListSetWeight]
+title = "[蝉] 整数列表设置权重"
+description = "设置整数列表 ${列表ID} 中值 ${整数} 的权重为 ${权重}"
+comment = "若该值不存在于列表中，则不做任何操作；列表中存在重复值时仅修改首个"
+category = TC_MondayIntList
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+default = "1"
