@@ -2,6 +2,8 @@ library CommonLib
 
 globals
     hashtable GlobalHash = InitHashtable()
+    real RectRandomWalkableX = 0.0
+    real RectRandomWalkableY = 0.0
 endglobals
 
 // 显示DEBUG信息
@@ -465,6 +467,168 @@ function CreateSpaces takes integer count returns string
     endloop
 
     return result
+endfunction
+
+// ============================================================================
+// 可通行坐标检测
+// 使用物品位移法检测地形可通行性
+// ============================================================================
+
+// 在矩形区域内寻找一个随机可通行坐标
+// 结果存入全局变量 RectRandomWalkableX / RectRandomWalkableY
+// 找不到时返回 false，全局变量设为矩形中心
+function FindRectRandomWalkablePoint takes rect r, integer maxRetries returns boolean
+    local real x
+    local real y
+    local real ix
+    local real iy
+    local item it
+    local integer i = 0
+
+    loop
+        exitwhen i >= maxRetries
+
+        set x = GetRandomReal(GetRectMinX(r), GetRectMaxX(r))
+        set y = GetRandomReal(GetRectMinY(r), GetRectMaxY(r))
+        set it = CreateItem('wolg', x, y)
+        set ix = GetItemX(it)
+        set iy = GetItemY(it)
+        call RemoveItem(it)
+        set it = null
+
+        // 物品未发生位移且仍在矩形内，视为可通行
+        if (ix - x) * (ix - x) + (iy - y) * (iy - y) < 1.0 and isCoordinateInRect(r, ix, iy) then
+            set RectRandomWalkableX = ix
+            set RectRandomWalkableY = iy
+            return true
+        endif
+
+        set i = i + 1
+    endloop
+
+    // 未找到可通行点，返回矩形中心
+    set RectRandomWalkableX = (GetRectMinX(r) + GetRectMaxX(r)) / 2.0
+    set RectRandomWalkableY = (GetRectMinY(r) + GetRectMaxY(r)) / 2.0
+    return false
+endfunction
+
+// 获取上次查找的可通行 X 坐标
+function GetRectRandomWalkableX takes nothing returns real
+    return RectRandomWalkableX
+endfunction
+
+// 获取上次查找的可通行 Y 坐标
+function GetRectRandomWalkableY takes nothing returns real
+    return RectRandomWalkableY
+endfunction
+
+// 检测坐标是否可通行（物品位移法）
+// 返回 true 表示可通行
+private function IsPointWalkable takes real x, real y returns boolean
+    local item it
+    local real dx
+    local real dy
+
+    // 先用原生函数快速排除地形不可通行的点
+    if IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
+        return false
+    endif
+
+    // 地形可通行，再用物品位移法精确确认
+    set it = CreateItem('wolg', x, y)
+    set dx = GetItemX(it) - x
+    set dy = GetItemY(it) - y
+    call RemoveItem(it)
+    set it = null
+    return dx * dx + dy * dy < 1.0
+endfunction
+
+// 将单位移动到最近的可通行坐标
+// 在单位当前位置创建物品，若物品位移则移动单位到物品最终位置
+function MoveUnitToWalkablePoint takes unit whichUnit returns nothing
+    local real ux = GetUnitX(whichUnit)
+    local real uy = GetUnitY(whichUnit)
+    local item it = CreateItem('wolg', ux, uy)
+    local real ix = GetItemX(it)
+    local real iy = GetItemY(it)
+
+    call RemoveItem(it)
+    set it = null
+
+    // 物品发生位移，说明单位当前位置不可通行
+    if (ix - ux) * (ix - ux) + (iy - uy) * (iy - uy) >= 1.0 then
+        call SetUnitX(whichUnit, ix)
+        call SetUnitY(whichUnit, iy)
+    endif
+endfunction
+
+// 将单位移动到矩形区域内最近的可通行坐标
+// 优先使用物品位移法，其次沿指向矩形中心的方向逐步搜索，最后随机兜底
+function MoveUnitToWalkablePointInRect takes unit whichUnit, rect r returns nothing
+    local real ux = GetUnitX(whichUnit)
+    local real uy = GetUnitY(whichUnit)
+    local item it
+    local real ix
+    local real iy
+    local real cx
+    local real cy
+    local real angle
+    local real dist
+    local real maxDist
+    local real step
+    local real checkX
+    local real checkY
+
+    // 单位在矩形内且可通行，不做任何操作
+    if isCoordinateInRect(r, ux, uy) and IsPointWalkable(ux, uy) then
+        return
+    endif
+
+    // 尝试物品位移法：在单位位置创建物品，检查最终位置是否在矩形内
+    set it = CreateItem('wolg', ux, uy)
+    set ix = GetItemX(it)
+    set iy = GetItemY(it)
+    call RemoveItem(it)
+    set it = null
+
+    if isCoordinateInRect(r, ix, iy) then
+        call SetUnitX(whichUnit, ix)
+        call SetUnitY(whichUnit, iy)
+        return
+    endif
+
+    // 沿单位指向矩形中心的方向逐步搜索可通行点
+    set cx = (GetRectMinX(r) + GetRectMaxX(r)) / 2.0
+    set cy = (GetRectMinY(r) + GetRectMaxY(r)) / 2.0
+    set angle = Atan2(cy - uy, cx - ux)
+    set maxDist = GetRectDiagonalLength(r)
+    set step = 50.0
+    set dist = step
+
+    loop
+        exitwhen dist > maxDist
+
+        set checkX = ux + dist * Cos(angle)
+        set checkY = uy + dist * Sin(angle)
+
+        if isCoordinateInRect(r, checkX, checkY) and IsPointWalkable(checkX, checkY) then
+            call SetUnitX(whichUnit, checkX)
+            call SetUnitY(whichUnit, checkY)
+            return
+        endif
+
+        set dist = dist + step
+    endloop
+
+    // 对角线上未找到，随机兜底
+    if FindRectRandomWalkablePoint(r, 20) then
+        call SetUnitX(whichUnit, RectRandomWalkableX)
+        call SetUnitY(whichUnit, RectRandomWalkableY)
+    else
+        // 极端情况：随机也没找到，移到矩形中心
+        call SetUnitX(whichUnit, cx)
+        call SetUnitY(whichUnit, cy)
+    endif
 endfunction
 
 endlibrary 

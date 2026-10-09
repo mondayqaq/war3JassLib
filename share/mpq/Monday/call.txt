@@ -377,3 +377,29 @@ returns = string
 [[.args]]
 type = integer
 default = "0"
+
+[FindRectRandomWalkablePoint]
+title = "获取矩形区域内随机可通行坐标"
+description = "在 ${矩形区域} 内寻找随机可通行坐标（最多尝试 ${次数} 次）"
+comment = "返回是否找到；结果通过「获取可通行X坐标」和「获取可通行Y坐标」获取；找不到时坐标为矩形中心"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = rect
+[[.args]]
+type = integer
+default = "20"
+
+[GetRectRandomWalkableX]
+title = "获取可通行X坐标"
+description = "获取上次查找的可通行X坐标"
+comment = "使用前请先调用「获取矩形区域内随机可通行坐标」"
+category = TC_Monday
+returns = real
+
+[GetRectRandomWalkableY]
+title = "获取可通行Y坐标"
+description = "获取上次查找的可通行Y坐标"
+comment = "使用前请先调用「获取矩形区域内随机可通行坐标」"
+category = TC_Monday
+returns = real

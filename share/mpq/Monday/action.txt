@@ -50,3 +50,32 @@ category = TC_Monday
 type = unit
 [[.args]]
 type = unit
+
+[FindRectRandomWalkablePoint]
+title = "[蝉] 获取矩形区域内随机可通行坐标"
+description = "在 ${矩形区域} 内寻找随机可通行坐标（至多尝试 ${次数} 次）"
+comment = "结果通过「获取可通行X坐标」和「获取可通行Y坐标」获取；找不到时返回矩形中心坐标"
+category = TC_Monday
+[[.args]]
+type = rect
+[[.args]]
+type = integer
+default = "20"
+
+[MoveUnitToWalkablePoint]
+title = "[蝉] 移动单位到最近可通行坐标"
+description = "将 ${单位} 移动到最近的可通行坐标"
+comment = "若单位当前位置可通行则不做任何操作"
+category = TC_Monday
+[[.args]]
+type = unit
+
+[MoveUnitToWalkablePointInRect]
+title = "[蝉] 移动单位到区域内可通行坐标"
+description = "将 ${单位} 移动到 ${矩形区域} 内最近的可通行坐标"
+comment = "若单位在区域内且可通行则不操作；优先物品位移，其次沿指向区域中心方向搜索，最后随机兜底"
+category = TC_Monday
+[[.args]]
+type = unit
+[[.args]]
+type = rect
