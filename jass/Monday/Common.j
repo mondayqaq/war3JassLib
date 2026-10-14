@@ -25,6 +25,18 @@ function GetRectRandomY takes rect r returns real
     return GetRectMinY(r) + GetRandomReal(0, GetRectHeightBJ(r))
 endfunction
 
+// 按百分比概率判定是否成功
+// chance 使用 0~100 范围，5.0 表示 5% 概率
+function RollChance takes real chance returns boolean
+    if chance <= 0.0 then
+        return false
+    elseif chance >= 100.0 then
+        return true
+    endif
+
+    return GetRandomReal(0.0, 100.0) < chance
+endfunction
+
 // 获取矩形区域的对角线长度
 function GetRectDiagonalLength takes rect r returns real
     local real width

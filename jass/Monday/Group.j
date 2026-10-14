@@ -82,6 +82,17 @@ function GetUnitGroupInRangeEx takes real x, real y, real radius, player whichPl
     return filteredGroup
 endfunction
 
+// 获取范围内符合条件的随机友方单位
+// 复用 GetUnitGroupInRangeEx 进行筛选；没有符合条件的单位时返回 null
+function GetRandomAllyUnitInRangeEx takes player sourcePlayer, real x, real y, real radius, boolean excludeDead, boolean excludeStructures, boolean excludeInvulnerable, boolean includeNeutral returns unit
+    local group allyGroup = GetUnitGroupInRangeEx(x, y, radius, sourcePlayer, true, excludeDead, excludeStructures, excludeInvulnerable, includeNeutral)
+    local unit randomUnit = GroupPickRandomUnit(allyGroup)
+
+    call DestroyGroup(allyGroup)
+    set allyGroup = null
+    return randomUnit
+endfunction
+
 /**
  * 计算单位组中符合条件的单位数量
  * 

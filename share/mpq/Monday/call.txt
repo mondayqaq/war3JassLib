@@ -16,6 +16,16 @@ returns = real
 [[.args]]
 type = rect
 
+[RollChance]
+title = "概率判定"
+description = "以 ${概率}% 的概率返回真"
+comment = "概率范围为0~100；例如5表示5%概率"
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = real
+default = "5.00"
+
 [GetRectDiagonalLength]
 title = "获取矩形区域对角线长度"
 description = "获取 ${矩形区域} 的对角线长度"
