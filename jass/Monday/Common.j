@@ -432,6 +432,16 @@ function BooleanOr takes boolean a, boolean b returns boolean
     return a or b
 endfunction
 
+/**
+ * 逻辑非运算
+ *
+ * @param a 布尔值
+ * @returns 布尔值的非运算结果
+ */
+function BooleanNot takes boolean a returns boolean
+    return not a
+endfunction
+
 // 连接两个传送门，使它们互相指向对方
 function LinkWaygates takes unit waygate1, unit waygate2 returns nothing
     // 激活两个传送门

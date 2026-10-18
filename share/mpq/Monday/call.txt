@@ -339,6 +339,16 @@ default = "true"
 type = boolean
 default = "true"
 
+[BooleanNot]
+title = "非运算"
+description = "非 ${布尔值}"
+comment = ""
+category = TC_Monday
+returns = boolean
+[[.args]]
+type = boolean
+default = "true"
+
 [CompareUnitType]
 title = "比较单位类型"
 description = "${单位类型} 等于 ${单位类型}"
