@@ -79,3 +79,14 @@ category = TC_Monday
 type = unit
 [[.args]]
 type = rect
+
+[DestroyEffectEx]
+title = "销毁特效"
+description = "在 ${延迟} 秒后销毁 ${特效}"
+comment = "持续时间小于等于0时立即销毁特效，否则使用YDWE计时器系统延迟销毁"
+category = TC_Monday
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = effect

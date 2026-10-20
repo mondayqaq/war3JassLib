@@ -1,4 +1,6 @@
-library CommonLib
+#include "YDWETimerSystem.j"
+
+library CommonLib requires YDWETimerSystem
 
 globals
     hashtable GlobalHash = InitHashtable()
@@ -95,6 +97,15 @@ function createFloatText takes string str, real height, integer red, integer gre
     call SetTextTagPermanent(text, false)
     call SetTextTagVisibility(text, true)
 endfunction    
+
+// 销毁特效；延迟小于等于0时立即销毁，否则延迟销毁
+function DestroyEffectEx takes real delay, effect whichEffect returns nothing
+    if delay <= 0.0 then
+        call DestroyEffect(whichEffect)
+    else
+        call YDWETimerDestroyEffect(delay, whichEffect)
+    endif
+endfunction
 
 // 坐标是否在矩形区域内
 function isCoordinateInRect takes rect r, real x, real y returns boolean
