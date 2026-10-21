@@ -23,18 +23,36 @@ function IncAbilityLevel takes unit targetUnit, integer abilityId, integer level
     endif
 endfunction
 
-// 添加技能给单位并设置技能等级
+// 降低单位的技能等级；降低至0及以下时删除技能
+function DecAbilityLevel takes unit targetUnit, integer abilityId, integer levels returns nothing
+    local integer currentLevel = GetUnitAbilityLevel(targetUnit, abilityId)
+    local integer newLevel
+
+    if currentLevel == 0 or levels <= 0 then
+        return
+    endif
+
+    set newLevel = currentLevel - levels
+    if newLevel <= 0 then
+        call UnitRemoveAbility(targetUnit, abilityId)
+    else
+        call SetUnitAbilityLevel(targetUnit, abilityId, newLevel)
+    endif
+endfunction
+
+// 添加技能给单位并设置技能等级；等级小于等于0时移除已有技能
 function SetAbilityLevel takes unit targetUnit, integer abilityId, integer levels returns nothing
     local integer currentLevel = GetUnitAbilityLevel(targetUnit, abilityId)
-    if currentLevel == 0 then
+
+    if levels <= 0 then
+        if currentLevel > 0 then
+            call UnitRemoveAbility(targetUnit, abilityId)
+        endif
+    elseif currentLevel == 0 then
         call UnitAddAbility(targetUnit, abilityId)
-        if levels > 1 then
-            call SetUnitAbilityLevel(targetUnit, abilityId, levels)
-        endif
-    else
-        if levels >= 1 and levels != currentLevel then
-            call SetUnitAbilityLevel(targetUnit, abilityId, levels)
-        endif
+        call SetUnitAbilityLevel(targetUnit, abilityId, levels)
+    elseif levels != currentLevel then
+        call SetUnitAbilityLevel(targetUnit, abilityId, levels)
     endif
 endfunction
 

@@ -12,10 +12,24 @@ type = abilcode
 type = integer
 default = "1"
 
+[DecAbilityLevel]
+title = "[技能] 降低单位的技能等级（自动删除技能）"
+description = "降低 ${单位} 的 ${技能} 等级 ${等级} 级"
+comment = "单位没有对应技能或降低等级≤0时不操作；降低后等级≤0时删除技能"
+category = TC_Monday
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+
 [SetAbilityLevel]
-title = "[技能] 设置单位的技能等级（无技能时自动添加）"
+title = "[技能] 设置单位的技能等级（自动添加/删除技能）"
 description = "设置 ${单位} 的 ${技能} 等级为 ${等级} 级"
-comment = "没有对应技能的单位会先添加技能，再设置技能等级"
+comment = "设置的等级＞0，且单位没有对应技能时，自动添加；设置的等级≤0，且单位有对应的技能时，自动删除"
 category = TC_Monday
 [[.args]]
 type = unit
