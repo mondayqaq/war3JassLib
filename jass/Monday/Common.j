@@ -340,6 +340,19 @@ function CalculateRealWithInt takes real realNum, integer operatorType, integer 
     return CalculateRealWithReal(realNum, operatorType, I2R(intNum))
 endfunction
 
+// 算数运算（实数与整数，返回整数）
+// roundUp 为 true 时向上取整，否则按 R2I 截断
+function CalculateRealWithIntToInteger takes real realNum, integer operatorType, integer intNum, boolean roundUp returns integer
+    local real result = CalculateRealWithInt(realNum, operatorType, intNum)
+    local integer integerResult = R2I(result)
+
+    if roundUp and I2R(integerResult) < result then
+        return integerResult + 1
+    endif
+
+    return integerResult
+endfunction
+
 // 算数运算（实数与实数与整数）
 function CalculateRealWithIntExtended takes real realNum1, integer operatorType1, real realNum2, integer operatorType2, integer intNum returns real
     // 先乘除后加减

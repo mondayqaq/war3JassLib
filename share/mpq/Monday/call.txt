@@ -212,6 +212,25 @@ default = "ArithmeticOperators_0"
 type = integer
 default = "0"
 
+[CalculateRealWithIntToInteger]
+title = "算数运算 Lv.2（实数与整数，返回整数）"
+description = "${实数} ${算数运算符} ${整数}，向上取整（${布尔值}）"
+comment = "整数会转化为实数。若除数为0返回0；向上取整为否时按R2I截断"
+category = TC_Monday
+returns = integer
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = ArithmeticOperators
+default = "ArithmeticOperators_0"
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = boolean
+default = "false"
+
 [CalculateRealWithIntExtended]
 title = "算数运算 Lv.3（实数与整数）"
 description = "${实数} ${算数运算符} ${实数} ${算数运算符} ${整数}"
