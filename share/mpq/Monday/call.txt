@@ -392,10 +392,10 @@ default = ""
 type = string
 default = ""
 
-[ShrinkRect]
-title = "缩小矩形区域"
-description = "将 ${矩形区域} 宽度缩小 ${缩小宽度}、高度缩小 ${缩小高度}"
-comment = "返回新矩形；宽度和高度各自缩小对应总值，左右和上下两侧各缩小一半"
+[ResizeRect]
+title = "缩放矩形区域"
+description = "缩放 ${矩形区域} 宽度 ${宽度变化}、高度 ${高度变化}"
+comment = "返回以原中心为中心的新矩形；正数扩大，负数缩小；缩小幅度最多为原宽或原高"
 category = TC_Monday
 returns = rect
 [[.args]]

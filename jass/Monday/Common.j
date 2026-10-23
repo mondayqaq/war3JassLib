@@ -477,8 +477,9 @@ function LinkWaygates takes unit waygate1, unit waygate2 returns nothing
     call WaygateSetDestination(waygate2, GetUnitX(waygate1), GetUnitY(waygate1))
 endfunction
 
-// 将矩形宽度和高度向中心缩小指定值并返回新矩形
-function ShrinkRect takes rect sourceRect, real shrinkWidth, real shrinkHeight returns rect
+// 调整矩形宽度和高度并返回以原中心为中心的新矩形
+// 宽高变化量为正时扩大，为负时缩小；缩小至最小时保留宽度或高度为0
+function ResizeRect takes rect sourceRect, real widthChange, real heightChange returns rect
     local real minX = GetRectMinX(sourceRect)
     local real maxX = GetRectMaxX(sourceRect)
     local real minY = GetRectMinY(sourceRect)
@@ -486,19 +487,15 @@ function ShrinkRect takes rect sourceRect, real shrinkWidth, real shrinkHeight r
     local real width = maxX - minX
     local real height = maxY - minY
 
-    if shrinkWidth < 0.0 then
-        set shrinkWidth = 0.0
-    elseif shrinkWidth > width then
-        set shrinkWidth = width
+    if widthChange < -width then
+        set widthChange = -width
     endif
 
-    if shrinkHeight < 0.0 then
-        set shrinkHeight = 0.0
-    elseif shrinkHeight > height then
-        set shrinkHeight = height
+    if heightChange < -height then
+        set heightChange = -height
     endif
 
-    return Rect(minX + shrinkWidth / 2.0, minY + shrinkHeight / 2.0, maxX - shrinkWidth / 2.0, maxY - shrinkHeight / 2.0)
+    return Rect(minX - widthChange / 2.0, minY - heightChange / 2.0, maxX + widthChange / 2.0, maxY + heightChange / 2.0)
 endfunction
 
 // 返回由指定数量空格组成的字符串，非正数返回空字符串
